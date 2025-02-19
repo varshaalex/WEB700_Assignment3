@@ -1,3 +1,14 @@
+/*********************************************************************************
+*  WEB700 – Assignment 03
+*  I declare that this assignment is my own work in accordance with Seneca  Academic Policy.  No part 
+*  of this assignment has been copied manually or electronically from any other source 
+*  (including 3rd party web sites) or distributed to other students.
+* 
+*  Name: Varsha Maria Alex
+   Student ID: 180085235
+   Date: 19-02-2025
+*
+********************************************************************************/ 
 const fs = require("fs");
 
 class Data{
@@ -7,7 +18,7 @@ class Data{
     }
 }
 
-let dataCollection = null;
+let dataInfo = null;
 
 module.exports.initialize = function () {
     return new Promise( (resolve, reject) => {
@@ -21,7 +32,7 @@ module.exports.initialize = function () {
                     reject("unable to load students"); return;
                 }
 
-                dataCollection = new Data(JSON.parse(studentData), JSON.parse(courseData));
+                dataInfo = new Data(JSON.parse(studentData), JSON.parse(courseData));
                 resolve();
             });
         });
@@ -30,11 +41,11 @@ module.exports.initialize = function () {
 
 module.exports.getAllStudents = function(){
     return new Promise((resolve,reject)=>{
-        if (dataCollection.students.length == 0) {
-            reject("query returned 0 results"); return;
+        if (dataInfo.students.length == 0) {
+            reject("No results Available"); return;
         }
 
-        resolve(dataCollection.students);
+        resolve(dataInfo.students);
     })
 }
 
@@ -42,14 +53,14 @@ module.exports.getTAs = function () {
     return new Promise(function (resolve, reject) {
         var filteredStudents = [];
 
-        for (let i = 0; i < dataCollection.students.length; i++) {
-            if (dataCollection.students[i].TA == true) {
-                filteredStudents.push(dataCollection.students[i]);
+        for (let i = 0; i < dataInfo.students.length; i++) {
+            if (dataInfo.students[i].TA == true) {
+                filteredStudents.push(dataInfo.students[i]);
             }
         }
 
         if (filteredStudents.length == 0) {
-            reject("query returned 0 results"); return;
+            reject("No results Available"); return;
         }
 
         resolve(filteredStudents);
@@ -58,11 +69,11 @@ module.exports.getTAs = function () {
 
 module.exports.getCourses = function(){
    return new Promise((resolve,reject)=>{
-    if (dataCollection.courses.length == 0) {
-        reject("query returned 0 results"); return;
+    if (dataInfo.courses.length == 0) {
+        reject("No results Available"); return;
     }
 
-    resolve(dataCollection.courses);
+    resolve(dataInfo.courses);
    });
 };
 
@@ -70,14 +81,14 @@ module.exports.getStudentByNum = function (num) {
     return new Promise(function (resolve, reject) {
         var foundStudent = null;
 
-        for (let i = 0; i < dataCollection.students.length; i++) {
-            if (dataCollection.students[i].studentNum == num) {
-                foundStudent = dataCollection.students[i];
+        for (let i = 0; i < dataInfo.students.length; i++) {
+            if (dataInfo.students[i].studentNum == num) {
+                foundStudent = dataInfo.students[i];
             }
         }
 
         if (!foundStudent) {
-            reject("query returned 0 results"); return;
+            reject("No results Available"); return;
         }
 
         resolve(foundStudent);
@@ -88,14 +99,14 @@ module.exports.getStudentsByCourse = function (course) {
     return new Promise(function (resolve, reject) {
         var filteredStudents = [];
 
-        for (let i = 0; i < dataCollection.students.length; i++) {
-            if (dataCollection.students[i].course == course) {
-                filteredStudents.push(dataCollection.students[i]);
+        for (let i = 0; i < dataInfo.students.length; i++) {
+            if (dataInfo.students[i].course == course) {
+                filteredStudents.push(dataInfo.students[i]);
             }
         }
 
         if (filteredStudents.length == 0) {
-            reject("query returned 0 results"); return;
+            reject("No results Available"); return;
         }
 
         resolve(filteredStudents);

@@ -13,7 +13,7 @@ const express = require("express");
 const path = require("path");
 const collegeData = require("./modules/collegeData");
 const app = express();
-const HTTP_PORT = process.env.PORT || 8081;
+const HTTP_PORT = process.env.PORT || 8083;
 
 // Home Page Route
 app.get("/home", (req, res) => {
